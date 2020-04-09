@@ -1,0 +1,28 @@
+{
+  "name": "extracash-map",
+  "version": "1.0.0",
+  "description": "A map to see extracash places",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next",
+    "prebuild": "node scripts/download_pdf.js && node scripts/to_json.js",
+    "build": "next build",
+    "start": "next start"
+  },
+  "keywords": [],
+  "author": "Santiago Vázquez",
+  "license": "MIT",
+  "dependencies": {
+    "@usig-gcba/mapa-interactivo": "^1.2.5",
+    "next": "^9.3.4",
+    "now": "^17.1.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "bluebird": "^3.7.2",
+    "lodash": "^4.17.15",
+    "node-fetch": "^2.6.0",
+    "pdf2json": "^1.2.0"
+  }
+}
