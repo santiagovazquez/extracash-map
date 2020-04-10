@@ -4,10 +4,18 @@ import { places } from '../files/places';
 
 export default class Map extends Component {
   componentDidMount() {
-    const mapaInteractivo = new MapaInteractivo("mapa", {center: [-34.62, -58.44]});
-    places.forEach(p => {
-      mapaInteractivo.addMarker({ lat: p.lat, lng: p.lng }, true)
+    const mapaInteractivo = new MapaInteractivo("mapa", {
+      center: [-34.62, -58.44],
+      onMarkerClick: function(markerId) {
+        const p = places[markerId];
+        mapaInteractivo.addPopup([p.lat, p.lng], `<div><b>${p.name}</b></div><div>${p.street} ${p.number || ''}</div>`);
+      },
     });
+    places.forEach((p, idx) => {
+      // latlng: Object, visible: boolean, draggable: boolean, goTo: boolean, activate: boolean, clickable: boolean, options: Object
+      mapaInteractivo.addMarker({ lat: p.lat, lng: p.lng }, true, false, true, false, true, { markerId: idx });
+    });
+
   }
 
   render() {
