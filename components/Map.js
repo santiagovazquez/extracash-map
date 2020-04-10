@@ -6,19 +6,31 @@ export default class Map extends Component {
   componentDidMount() {
     const mapaInteractivo = new MapaInteractivo("mapa", {
       center: [-34.62, -58.44],
+      zoomControl: true,
+      attributionControl: true,
       onMarkerClick: function(markerId) {
         const p = places[markerId];
         mapaInteractivo.addPopup([p.lat, p.lng], `<div><b>${p.name}</b></div><div>${p.street} ${p.number || ''}</div>`);
       },
     });
     places.forEach((p, idx) => {
-      // latlng: Object, visible: boolean, draggable: boolean, goTo: boolean, activate: boolean, clickable: boolean, options: Object
       mapaInteractivo.addMarker({ lat: p.lat, lng: p.lng }, true, false, true, false, true, { markerId: idx });
     });
-
   }
 
   render() {
-    return <div id='mapa' style={{margin: -8, width: '100%', height: '100%', position: 'absolute'}}></div>
+    return <><div id='mapa'></div>
+      <style global jsx>{`
+        #mapa {
+          margin: -8px; 
+          width: 100%; 
+          height: 100%; 
+          position: absolute;
+        }
+        .leaflet-popup-pane {
+          margin-top: -30px !important;
+        }
+
+      `}</style></>
   }
 }
