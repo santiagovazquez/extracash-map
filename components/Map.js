@@ -6,14 +6,10 @@ const getPosition = () => {
   return new Promise(function(resolve) {
     if (window.navigator.geolocation) {
       window.navigator.geolocation.getCurrentPosition(
-        ({ coords }) => resolve({ latitude: coords.latitude.toFixed(2), longitude: coords.longitude.toFixed(2) }),
-        (e) => {
-          console.error(e);
-          resolve({ latitude: -34.62, longitude: -58.44 });
-        },
+        ({ coords }) => { resolve({ latitude: coords.latitude, longitude: coords.longitude }); },
+        (e) => { resolve({ latitude: -34.62, longitude: -58.44 }); },
       );
     } else {
-      console.error('browser does not support geolocalization');
       resolve({ latitude: -34.62, longitude: -58.44 });
     }
   });
@@ -24,10 +20,11 @@ export default class Map extends Component {
 
     getPosition()
       .then((coords) => {
-        console.log(coords);
         const mapaInteractivo = new MapaInteractivo("mapa", {
           center: [coords.latitude, coords.longitude],
           zoomControl: true,
+          zoom: 16,
+          minZoom: 11,
           attributionControl: true,
           onMarkerClick: function(markerId) {
             const p = places[markerId];
@@ -35,7 +32,7 @@ export default class Map extends Component {
           },
         });
         places.forEach((p, idx) => {
-          mapaInteractivo.addMarker({ lat: p.lat, lng: p.lng }, true, false, true, false, true, { markerId: idx });
+          mapaInteractivo.addMarker({ lat: p.lat, lng: p.lng }, true, false, false, false, true, { markerId: idx });
         });
       })
   }
