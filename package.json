@@ -14,7 +14,7 @@
   "license": "MIT",
   "dependencies": {
     "@usig-gcba/mapa-interactivo": "^1.2.5",
-    "next": "^9.3.4",
+    "next": "^11.1.0",
     "now": "^17.1.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
