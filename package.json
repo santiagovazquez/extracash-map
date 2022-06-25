@@ -22,7 +22,7 @@
   "devDependencies": {
     "bluebird": "^3.7.2",
     "lodash": "^4.17.15",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.7",
     "pdf2json": "^1.2.0"
   }
 }
